@@ -36,7 +36,7 @@ module.exports = {
                 {
                     loader: 'file-loader',
                     options: {
-                        outputPath: 'images',
+                        outputPath: 'textures',
                         name: '[name].[ext]',
                     },
                 },

@@ -77,7 +77,7 @@ export default function createMyScenes(canvasElementId) {
         scene.beginAnimation(sphere, 0, 2 * frameRate, true);
     }
 
-    function setupSphereControls() { // Control logic for the objects
+    function setupSphereControls() {
         window.addEventListener("keydown", (evt) => {
             switch(evt.key) {
                 case "ArrowLeft": sphere.position.x -= 0.1; break;
@@ -95,7 +95,10 @@ export default function createMyScenes(canvasElementId) {
         cube.material = material;
         cube.position.y = 1;
 
-        const shadowGenerator = new BABYLON.ShadowGenerator(1024, light); // Shadows
+        // Dynamically add a rotationSpeed property
+        cube['rotationSpeed'] = 0.005;
+
+        const shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
         shadowGenerator.getShadowMap().renderList.push(cube);
 
         return cube;
@@ -103,8 +106,8 @@ export default function createMyScenes(canvasElementId) {
 
     function setupCubeRotation(cube, scene) {
         scene.onBeforeRenderObservable.add(() => {
-            cube.rotation.x += 0.005;
-            cube.rotation.y += 0.005;
+            cube.rotation.x += cube['rotationSpeed'];
+            cube.rotation.y += cube['rotationSpeed'];
         });
     }
 
@@ -126,14 +129,14 @@ export default function createMyScenes(canvasElementId) {
         skybox.material = skyMaterial;
     }
 
-    function createGUI(engine) {  // GUI for buttons and switching scenes
+    function createGUI(engine) {
         if (currentScene.GUI) {
             currentScene.GUI.dispose();
         }
-
+    
         const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, currentScene);
         currentScene.GUI = advancedTexture;
-
+    
         switchButton = GUI.Button.CreateSimpleButton("switchButton", "Switch Scene");
         switchButton.width = "150px";
         switchButton.height = "40px";
@@ -143,7 +146,32 @@ export default function createMyScenes(canvasElementId) {
             switchScene(engine);
         });
         advancedTexture.addControl(switchButton);
+    
+        // Add Cube Rotation Speed controls only in the cube scene
+        if (currentScene === scene2) {
+            const speedSlider = new GUI.Slider();
+            speedSlider.minimum = 0;
+            speedSlider.maximum = 0.1;
+            speedSlider.value = cube['rotationSpeed']; // default rotation speed
+            speedSlider.height = "20px";
+            speedSlider.width = "200px";
+            speedSlider.top = "100px";
+            speedSlider.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            speedSlider.onValueChangedObservable.add(value => {
+                cube['rotationSpeed'] = value;
+            });
+            advancedTexture.addControl(speedSlider);
+    
+            const sliderLabel = new GUI.TextBlock();
+            sliderLabel.text = "Cube Rotation Speed";
+            sliderLabel.height = "30px";
+            sliderLabel.color = "white";
+            sliderLabel.top = "70px";
+            sliderLabel.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            advancedTexture.addControl(sliderLabel);
+        }
     }
+    
 
     function switchScene(engine) {
         currentScene = currentScene === scene1 ? scene2 : scene1;
