@@ -1,0 +1,119 @@
+body {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #575454;
+    text-align: center;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+section {
+    padding: 20px;
+}
+
+#intro {
+    background: #f4f4f4;
+    text-align: center;
+}
+
+.work-item {
+    margin-bottom: 20px;
+}
+
+.work-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.work-item img {
+    width: 200px; 
+    height: auto; 
+}
+
+#carousel {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.work-item {
+    display: inline-block;
+    width: 100%; 
+}
+
+#project-details {
+    text-align: center;
+    margin: auto;
+    max-width: 80%; 
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#navbar {
+    background-color: #333;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#navbar ul li {
+    float: left;
+}
+
+#navbar ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#navbar ul li a:hover {
+    background-color: #111;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* Add further styling as needed */
