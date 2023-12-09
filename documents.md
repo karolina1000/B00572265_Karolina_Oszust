@@ -94,19 +94,6 @@ setupMainScene(canvasElementId): Initializes the entire application, handling th
 
 # scene5
 
-addSphere(scene, light) and addCube(scene, light): These functions create a sphere and a cube, respectively, each with its own material and texture. They also configure shadow generation for these objects.
-
-addSphereAnimation(sphere, scene) and setupCubeRotation(cube, scene): These functions add animations to the sphere and cube. The sphere's animation is a simple up-and-down movement, while the cube continuously rotates.
-
-setupSphereControls() and setupCubeControls(): These functions add keyboard event listeners to control the position and rotation of the sphere and cube, using the arrow keys.
-
-addSkybox(scene): Adds a skybox to the scene using the SkyMaterial.
-
-createGUI(engine): Creates an user interface for the current scene, including a button to switch between scenes.
-
-switchScene(engine): Handles the logic for switching between the two scenes.
-
-
 Babylon.js engine and sets up two scenes: scene1 and scene2.
 Each scene contains a 3D object (a sphere in scene1 and a cube in scene2) with textures and animations.
 Lighting and shadow generation are also configured for each scene.
@@ -115,3 +102,120 @@ GUI elements (a "Switch Scene" button) are added to switch between the scenes.
 The code sets up event listeners for keyboard input to control the objects in each scene. (Arrows)
 
 Users can interact with the objects in Scene 5 using keyboard inputs. The arrow keys allow for the movement of the sphere and the rotation of the cube, providing an interactive experience.
+
+
+
+Explanation:
+
+
+import * as BABYLON from '@babylonjs/core';
+import * as GUI from '@babylonjs/gui';
+import '@babylonjs/loaders';
+import { SkyMaterial } from '@babylonjs/materials';
+
+Here, the code imports various modules from Babylon.js, including the core library, GUI components, loaders, and materials. These modules are essential for creating and managing 3D scenes.
+
+
+export default function createMyScenes(canvasElementId) {
+    // Function implementation goes here
+}
+The createMyScenes function is the main entry point for setting up and managing the 3D scenes. It takes the canvasElementId as a parameter, which is the ID of the HTML canvas element where the scenes will be rendered.
+
+
+const canvas = document.getElementById(canvasElementId) as HTMLCanvasElement;
+const engine = new BABYLON.Engine(canvas, true);
+This code obtains the HTML canvas element using the provided canvasElementId and initializes a Babylon.js engine using that canvas.
+
+
+Variables:
+
+let currentScene;
+let scene1, scene2;
+let switchButton;
+let sphere, cube;
+Several variables are declared to keep track of the current scene, two scene instances (scene1 and scene2), a switch button for toggling between scenes, and references to sphere and cube meshes.
+
+
+scene1 = createScene(engine, canvas, "scene1");
+scene2 = createScene(engine, canvas, "scene2");
+scene1.GUI = scene2.GUI = null;
+currentScene = scene1;
+Two scenes (scene1 and scene2) are created using the createScene function. Each scene is associated with specific objects and behaviors. The GUI property of both scenes is initialized as null, and currentScene is initially set to scene1
+
+
+createGUI(engine);
+The createGUI function is called to set up the Graphical User Interface (GUI) for the scenes. It creates a button (switchButton) that allows users to switch between scenes.
+
+
+Rendering:
+
+doRender(engine);
+The doRender function is called to start the rendering loop, which continuously renders the current scene. It also adds a resize event listener to handle canvas resizing.
+
+
+function createScene(engine, canvas, name) {
+    // Scene creation logic for "scene1" and "scene2" goes here
+    // ...
+}
+The createScene function is responsible for creating individual scenes. Depending on the name parameter, it sets up either "scene1" or "scene2" with specific 3D objects, materials, animations, and controls.
+
+
+
+Scenes switching:
+
+function switchScene(engine) {
+    // Switches between "scene1" and "scene2"
+    // ...
+}
+The switchScene function allows users to switch between "scene1" and "scene2". It disposes of the current GUI, creates a new GUI, and updates the currentScene variable accordingly.
+
+
+Comtrols:
+
+function setupSphereControls() {
+    window.addEventListener("keydown", (evt) => {
+        switch (evt.key) {
+            case "ArrowLeft": sphere.position.x -= 0.1; break;
+            case "ArrowRight": sphere.position.x += 0.1; break;
+            case "ArrowUp": sphere.position.z -= 0.1; break;
+            case "ArrowDown": sphere.position.z += 0.1; break;
+        }
+    });
+}
+In the setupSphereControls function:
+
+An event listener is added to the window object to listen for keyboard events (keydown).
+When a key is pressed, the event object (evt) is passed to an arrow function.
+The arrow function checks which arrow key was pressed using evt.key.
+Depending on the arrow key pressed, the position of the sphere (sphere.position) is modified to move it left, right, forward, or backward along the X and Z axes.
+For example:
+
+Pressing the "ArrowLeft" key moves the sphere to the left (decreasing its X-coordinate).
+Pressing the "ArrowRight" key moves the sphere to the right (increasing its X-coordinate).
+Pressing the "ArrowUp" key moves the sphere forward (decreasing its Z-coordinate).
+Pressing the "ArrowDown" key moves the sphere backward (increasing its Z-coordinate).
+
+
+
+Cube Controls:
+
+function setupCubeControls() {
+    window.addEventListener("keydown", (evt) => {
+        switch (evt.key) {
+            case "ArrowLeft": cube.rotation.y -= 0.1; break;
+            case "ArrowRight": cube.rotation.y += 0.1; break;
+            case "ArrowUp": cube.rotation.x -= 0.1; break;
+            case "ArrowDown": cube.rotation.x += 0.1; break;
+        }
+    });
+}
+
+
+The setupCubeControls function is similar to setupSphereControls, but it controls the rotation of the cube object instead of its position. It allows users to rotate the cube around its X and Y axes based on the arrow keys pressed.
+
+
+
+
+
+
+
