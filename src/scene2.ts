@@ -79,7 +79,7 @@ function addMorePyramids(scene: BABYLON.Scene): void {
 
 function mergePyramids(scene: BABYLON.Scene): void {
     const meshes = scene.meshes.filter(mesh => mesh instanceof BABYLON.Mesh && mesh.name.includes("pyramid"));
-    // Ensure the filtered objects are of type Mesh[]
+    
     const pyramids = meshes as BABYLON.Mesh[];
 
     const mergedPyramid = BABYLON.Mesh.MergeMeshes(pyramids, true, true, undefined, false, true);

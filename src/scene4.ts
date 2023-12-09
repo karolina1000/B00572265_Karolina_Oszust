@@ -21,7 +21,7 @@ import { SkyMaterial } from '@babylonjs/materials';
         skyMaterial.mieCoefficient = 0.005;
         skyMaterial.mieDirectionalG = 0.8;
     
-        // Update the sun position based on time of day
+        // Update the sun position
         const sunPosition = new BABYLON.Vector3(0, 100, 0);
         skyMaterial.sunPosition = sunPosition;
     }

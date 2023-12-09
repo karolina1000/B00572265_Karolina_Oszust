@@ -4,7 +4,7 @@ import {
 } from "@babylonjs/core";
 import { SkyMaterial } from "@babylonjs/materials";
 
-// ... rest of your script ...
+
 
 
 let shadowGenerator;
@@ -41,7 +41,7 @@ function setupCameraAndLighting(scene: Scene, canvas: HTMLCanvasElement): void {
     shadowGenerator.setDarkness(0.7);
 }
 
-function addEnhancedMerging(scene: Scene): void {
+function addEnhancedMerging(scene: Scene): void { // Mesh merging for a custom shape
     const torus = MeshBuilder.CreateTorus("torus", { diameter: 3, thickness: 0.5 }, scene);
     torus.position = new Vector3(0, 1, 0);
     applyTextureToMesh(torus, 'textures/torusTexture.jpg', scene);

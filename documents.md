@@ -17,3 +17,11 @@ other textures - https://github.com/BabylonJS/Documentation/blob/master/content/
 background music - https://pixabay.com/music/build-up-scenes-a-long-way-166
 
 # scene5
+
+Babylon.js engine and sets up two scenes: scene1 and scene2.
+Each scene contains a 3D object (a sphere in scene1 and a cube in scene2) with textures and animations.
+Lighting and shadow generation are also configured for each scene.
+There's a skybox created for both scenes to provide a nicer background.
+GUI elements (a "Switch Scene" button) are added to switch between the scenes.
+The code sets up event listeners for keyboard input to control the objects in each scene. (Arrows)
+

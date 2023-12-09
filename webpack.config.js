@@ -28,6 +28,34 @@ module.exports = {
             test: /\.tsx?$/,
             loader: 'ts-loader',
             exclude: /node_modules/
-        }]
-    }
-}
+        },
+       
+        {
+            test: /\.(png|svg|jpg|jpeg|gif)$/i,
+            use: [
+                {
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'images',
+                        name: '[name].[ext]',
+                    },
+                },
+            ],
+        },
+        
+        {
+            test: /\.(gltf|glb)$/,
+            use: [
+                {
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'models',
+                        name: '[name].[ext]',
+                    },
+                },
+            ],
+        },
+        // Add more rules for other file types (e.g., fonts, audio) as needed
+    ],
+},
+};

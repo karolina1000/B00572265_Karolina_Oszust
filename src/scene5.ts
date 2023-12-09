@@ -77,7 +77,7 @@ export default function createMyScenes(canvasElementId) {
         scene.beginAnimation(sphere, 0, 2 * frameRate, true);
     }
 
-    function setupSphereControls() {
+    function setupSphereControls() { // Control logic for the objects
         window.addEventListener("keydown", (evt) => {
             switch(evt.key) {
                 case "ArrowLeft": sphere.position.x -= 0.1; break;
@@ -95,7 +95,7 @@ export default function createMyScenes(canvasElementId) {
         cube.material = material;
         cube.position.y = 1;
 
-        const shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+        const shadowGenerator = new BABYLON.ShadowGenerator(1024, light); // Shadows
         shadowGenerator.getShadowMap().renderList.push(cube);
 
         return cube;
@@ -126,7 +126,7 @@ export default function createMyScenes(canvasElementId) {
         skybox.material = skyMaterial;
     }
 
-    function createGUI(engine) {
+    function createGUI(engine) {  // GUI for buttons and switching scenes
         if (currentScene.GUI) {
             currentScene.GUI.dispose();
         }
